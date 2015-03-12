@@ -3,7 +3,9 @@ package treefortress.sound
 	import flash.utils.getTimer;
 	
 	import org.osflash.signals.Signal;
-	
+
+	import treefortress.sound.SoundManager;
+
 	public class SoundTween {
 		
 		public var startTime:int;
@@ -17,13 +19,19 @@ package treefortress.sound
 
 		public var ended:Signal;
 		public var stopAtZero:Boolean;
+
+		private var _manager:SoundManager;
 		
-		public function SoundTween(si:SoundInstance, endVolume:Number, duration:Number, isMasterFade:Boolean = false) {
+		public function SoundTween(manager:SoundManager, si:SoundInstance, endVolume:Number, duration:Number, isMasterFade:Boolean = false) {
+
+			this._manager = manager;
+
 			if(si){
 				sound = si;
 				startVolume = sound.volume;
 			}
-			
+
+
 			ended = new Signal(SoundInstance);
 			this.isMasterFade = isMasterFade;
 			init(startVolume, endVolume, duration);
@@ -34,11 +42,11 @@ package treefortress.sound
 			
 			if(isMasterFade){
 				if(t - startTime < duration){
-					SoundAS.masterVolume = easeOutQuad(t - startTime, startVolume, endVolume - startVolume, duration);
+					_manager.masterVolume = easeOutQuad(t - startTime, startVolume, endVolume - startVolume, duration);
 				} else {
-					SoundAS.masterVolume = endVolume;
+					_manager.masterVolume = endVolume;
 				}
-				_isComplete = SoundAS.masterVolume == endVolume;
+				_isComplete = _manager.masterVolume == endVolume;
 				
 			} else {
 				if(t - startTime < duration){
@@ -75,12 +83,14 @@ package treefortress.sound
 			}
 			ended.dispatch(this.sound);
 			ended.removeAll();
+			_manager = null;
 		}
 		
 		/** End the fade silently, will not send 'ended' signal **/
 		public function kill():void {
 			_isComplete = true;
 			ended.removeAll();
+			_manager = null;
 		}
 		
 		/**

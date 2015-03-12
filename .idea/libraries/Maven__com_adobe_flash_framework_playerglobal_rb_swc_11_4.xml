@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Maven: com.adobe.flash.framework:playerglobal:rb.swc:11.4" type="flex">
+    <CLASSES />
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/adobe/flash/framework/playerglobal/11.4/playerglobal-11.4-asdoc.zip!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/adobe/flash/framework/playerglobal/11.4/playerglobal-11.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

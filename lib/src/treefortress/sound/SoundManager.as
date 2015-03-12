@@ -271,7 +271,7 @@ package treefortress.sound
 			var si:SoundInstance = instancesByType[type];
 			if(si && si.url == url){ return; }
 			
-			si = new SoundInstance(null, type);
+			si = new SoundInstance(this, null, type);
 			si.url = url; //Useful for looking in case of load error
 			si.sound = new Sound(new URLRequest(url), new SoundLoaderContext(buffer, false));
 			si.sound.addEventListener(IOErrorEvent.IO_ERROR, onSoundLoadError, false, 0, true);
@@ -292,7 +292,7 @@ package treefortress.sound
 			} 
 				//Create a new SoundInstance
 			else {
-				si = new SoundInstance(sound, type);
+				si = new SoundInstance(this, sound, type);
 			}
 			addInstance(si);
 		}
@@ -374,7 +374,7 @@ package treefortress.sound
 		}
 		
 		internal function addMasterTween(startVolume:Number, endVolume:Number, duration:Number, stopAtZero:Boolean):void {
-			if(!_masterTween){ _masterTween = new SoundTween(null, 0, 0, true); }
+			if(!_masterTween){ _masterTween = new SoundTween(this, null, 0, 0, true); }
 			_masterTween.init(startVolume, endVolume, duration);
 			_masterTween.stopAtZero = stopAtZero;
 			_masterTween.update(0);
@@ -392,7 +392,7 @@ package treefortress.sound
 			//Kill any active fade, it will get removed the next time the tweens are updated.
 			if(si.fade){ si.fade.kill(); }
 			
-			var tween:SoundTween = new SoundTween(si, endVolume, duration);
+			var tween:SoundTween = new SoundTween(this, si, endVolume, duration);
 			tween.stopAtZero = stopAtZero;
 			tween.update(tween.startTime);
 			

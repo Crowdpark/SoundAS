@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Maven: org.apache.flex.framework:framework:rb.swc:4.13.0.20140701" type="flex">
+    <CLASSES />
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/flex/framework/framework/4.13.0.20140701/framework-4.13.0.20140701-asdoc.zip!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/flex/framework/framework/4.13.0.20140701/framework-4.13.0.20140701-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

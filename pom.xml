@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <groupId>de.crowdpark.libs</groupId>
+    <artifactId>SoundAS</artifactId>
+    <modelVersion>4.0.0</modelVersion>
+    <version>1.1-SNAPSHOT</version>
+
+    <packaging>swc</packaging>
+
+
+    <properties>
+        <buildVersion>custom</buildVersion>
+
+        <!-- src encoding -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <flexmojos.version>7.0.1</flexmojos.version>
+        <flex.version>4.13.0.20140701</flex.version>
+        <flash.version>11.4</flash.version>
+    </properties>
+
+    <build>
+        <sourceDirectory>lib/src</sourceDirectory>
+
+        <plugins>
+            <plugin>
+                <groupId>net.flexmojos.oss</groupId>
+                <artifactId>flexmojos-maven-plugin</artifactId>
+                <configuration>
+                    <skipTest>true</skipTest>
+                    <storepass/>
+                </configuration>
+            </plugin>
+        </plugins>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>net.flexmojos.oss</groupId>
+                    <artifactId>flexmojos-maven-plugin</artifactId>
+                    <version>${flexmojos.version}</version>
+                    <extensions>true</extensions>
+                    <dependencies>
+                        <dependency>
+                            <groupId>net.flexmojos.oss</groupId>
+                            <artifactId>flexmojos-threadlocaltoolkit-wrapper</artifactId>
+                            <version>${flexmojos.version}</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.apache.flex</groupId>
+                            <artifactId>compiler</artifactId>
+                            <version>${flex.version}</version>
+                            <type>pom</type>
+                        </dependency>
+                    </dependencies>
+                    <configuration>
+                        <storepass/>
+                        <targetPlayer>${flash.version}</targetPlayer>
+                        <debug>false</debug>
+                        <compilerWarnings>
+                            <warn-no-constructor>false</warn-no-constructor>
+                        </compilerWarnings>
+                        <advancedTelemetry>false</advancedTelemetry>
+                        <incremental>true</incremental>
+                        <verboseStacktraces>true</verboseStacktraces>
+                        <fonts>
+                            <advancedAntiAliasing>true</advancedAntiAliasing>
+                            <maxCachedFonts>20</maxCachedFonts>
+                            <maxGlyphsPerFace>1000</maxGlyphsPerFace>
+                            <managers>
+                                <manager>flash.fonts.AFEFontManager</manager>
+                            </managers>
+                        </fonts>
+                        <updateSecuritySandbox>true</updateSecuritySandbox>
+                    </configuration>
+                </plugin>
+
+            </plugins>
+        </pluginManagement>
+    </build>
+
+
+
+        <dependencies>
+            <dependency>
+                <groupId>org.apache.flex.framework</groupId>
+                <artifactId>flex-framework</artifactId>
+                <version>${flex.version}</version>
+                <type>pom</type>
+            </dependency>
+
+            <dependency>
+                <groupId>com.adobe.flash.framework</groupId>
+                <artifactId>playerglobal</artifactId>
+                <version>${flash.version}</version>
+                <type>swc</type>
+            </dependency>
+
+            <dependency>
+                <groupId>org.osflash</groupId>
+                <artifactId>as3-signals</artifactId>
+                <version>0.8</version>
+                <type>swc</type>
+            </dependency>
+
+        </dependencies>
+
+
+    <distributionManagement>
+        <repository>
+            <id>crowdpark-nexus</id>
+            <url>http://nexus.crowdpark-cloud.com:8081/nexus/content/repositories/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>crowdpark-nexus</id>
+            <url>http://nexus.crowdpark-cloud.com:8081/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <repositories>
+        <repository>
+            <id>crowdpark-nexus</id>
+            <name>Crowdpark nexus</name>
+            <url>http://nexus.crowdpark-cloud.com:8081/nexus/content/groups/public</url>
+            <snapshots>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>crowdpark-nexus-plugin</id>
+            <name>Crowdpark nexus plugin</name>
+            <url>http://nexus.crowdpark-cloud.com:8081/nexus/content/groups/public</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+</project>
