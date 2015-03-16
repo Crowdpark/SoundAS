@@ -67,7 +67,8 @@ package treefortress.sound
 		
 		protected var _soundTransform:SoundTransform;
 		internal var currentTween:SoundTween;
-		
+
+		private var _seamlessLooper:MP3Looper;
 		
 		
 		public function SoundInstance(manager:SoundManager, sound:Sound = null, type:String = null){
@@ -112,7 +113,15 @@ package treefortress.sound
 				_loopsRemaining = loops;
 				loops = 0;
 			}
-			
+
+
+			if(enableSeamlessLoops) {
+				_seamlessLooper = new MP3Looper(sound, true);
+				_seamlessLooper.play(_loopsRemaining)
+				_isPlaying = true;
+				return this;
+			}
+
 			this.allowMultiple = allowMultiple;
 			if(allowMultiple){
 				//Store old channel, so we can still stop it if requested.
@@ -145,6 +154,12 @@ package treefortress.sound
 		 * Pause currently playing sound. Use resume() to continue playback. Pause / resume is supported for single sounds only.
 		 */
 		public function pause():SoundInstance {
+
+			if(_seamlessLooper) {
+				_seamlessLooper.stop();
+				return this;
+			}
+
 			if(!channel){ return this; }
 			_isPlaying = false;
 			pauseTime = channel.position;
@@ -167,6 +182,12 @@ package treefortress.sound
 		 * Stop the currently playing sound and set it's position to 0
 		 */
 		public function stop():SoundInstance {
+
+			if(_seamlessLooper) {
+				_seamlessLooper.stop();
+				return this;
+			}
+
 			pauseTime = 0;
 			stopChannel(channel);
 			channel = null;
@@ -241,6 +262,12 @@ package treefortress.sound
 		 */
 		public function get volume():Number { return _volume; }
 		public function set volume(value:Number):void {
+
+			if(_seamlessLooper) {
+				_seamlessLooper.channel.soundTransform.volume = value;
+				return;
+			}
+
 			//Update the voume value, but respect the mute flag.
 			if(value < 0){ value = 0; } else if(value > 1 || isNaN(volume)){ value = 1; }
 			_volume = value;
@@ -287,6 +314,12 @@ package treefortress.sound
 		 * Unload sound from memory.
 		 */
 		public function destroy():void {
+			if(_seamlessLooper) {
+				_seamlessLooper.dispose();
+				_seamlessLooper = null;
+			}
+
+
 			soundCompleted.removeAll();
 			try {
 				sound.close();
@@ -297,6 +330,7 @@ package treefortress.sound
 			channel = null;
 			fade.end(false);
 			manager = null;
+
 		}
 		
 		/**
@@ -325,6 +359,7 @@ package treefortress.sound
 						soundCompleted.dispatch(this);
 					}
 				} else {
+
 					soundCompleted.dispatch(this);
 				}
 			}
