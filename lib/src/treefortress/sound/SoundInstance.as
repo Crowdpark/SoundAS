@@ -118,6 +118,7 @@ package treefortress.sound
 			if(enableSeamlessLoops) {
 				_seamlessLooper = new MP3Looper(sound, true);
 				_seamlessLooper.play(_loopsRemaining)
+                _seamlessLooper.volume = volume/100 * masterVolume;
 				_isPlaying = true;
 				return this;
 			}
@@ -263,14 +264,17 @@ package treefortress.sound
 		public function get volume():Number { return _volume; }
 		public function set volume(value:Number):void {
 
-			if(_seamlessLooper) {
-				_seamlessLooper.channel.soundTransform.volume = value;
-				return;
-			}
+
 
 			//Update the voume value, but respect the mute flag.
 			if(value < 0){ value = 0; } else if(value > 1 || isNaN(volume)){ value = 1; }
 			_volume = value;
+
+            if(_seamlessLooper) {
+                _seamlessLooper.volume = mixedVolume;
+                return;
+            }
+
 			soundTransform.volume = mixedVolume;
 			if(!_muted && channel){
 				channel.soundTransform = soundTransform;

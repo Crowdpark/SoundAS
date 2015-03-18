@@ -36,9 +36,10 @@ package treefortress.sound
 		protected var _masterTween:SoundTween;
 		private var _searching:Boolean;
 		
-		public function SoundManager(){
-			init();
-		}
+		public function SoundManager()
+        {
+            init();
+        }
 		
 		/**
 		 * Dispatched when an external Sound has completed loading. 

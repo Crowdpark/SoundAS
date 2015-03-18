@@ -5,7 +5,8 @@ package treefortress.sound
 	import flash.events.SampleDataEvent;
 	import flash.media.Sound;
 	import flash.media.SoundChannel;
-	import flash.utils.ByteArray;
+    import flash.media.SoundTransform;
+    import flash.utils.ByteArray;
 
 	/**
 	 * @author antonstepanov
@@ -51,6 +52,14 @@ package treefortress.sound
 		{
 			return _channel;
 		}
+
+        public function set volume(value:Number):void {
+            if(_channel && _channel.soundTransform) {
+                var transform:SoundTransform = _channel.soundTransform;
+                transform.volume = value;
+                _channel.soundTransform = transform;
+            }
+        }
 
 		public function get isPlaying():Boolean
 		{
@@ -158,8 +167,9 @@ package treefortress.sound
 				if (samplesPosition == samplesTotal) // END OF LOOP > WRAP
 				{
 
+                    trace("[MP3Looper remaining loopcount]: " + currentPlayCount);
 					currentPlayCount--;
-					if (currentPlayCount == 0)
+					if (currentPlayCount <= 0)
 					{
 						length = 0;
 						samplesPosition = 0;

@@ -2,7 +2,7 @@
 <module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="Flex" version="4">
   <component name="FlexBuildConfigurationManager" active="SoundAS">
     <configurations>
-      <configuration name="SoundAS" output-type="Library" output-file="SoundAS-1.1-SNAPSHOT.swc" output-folder="$MODULE_DIR$/target">
+      <configuration name="SoundAS" output-type="Library" output-file="SoundAS-1.2-SNAPSHOT.swc" output-folder="$MODULE_DIR$/target">
         <dependencies>
           <entries>
             <entry library-name="Maven: org.apache.flex.framework:advancedgrids:swc:4.13.0.20140701" library-level="project">

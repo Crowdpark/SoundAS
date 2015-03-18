@@ -6,7 +6,7 @@
     <groupId>de.crowdpark.libs</groupId>
     <artifactId>SoundAS</artifactId>
     <modelVersion>4.0.0</modelVersion>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.2-SNAPSHOT</version>
 
     <packaging>swc</packaging>
 
@@ -58,8 +58,10 @@
                     </dependencies>
                     <configuration>
                         <storepass/>
+                        <docSources>lib/src</docSources>
+                        <doc>true</doc>
                         <targetPlayer>${flash.version}</targetPlayer>
-                        <debug>false</debug>
+                        <debug>true</debug>
                         <compilerWarnings>
                             <warn-no-constructor>false</warn-no-constructor>
                         </compilerWarnings>
@@ -76,6 +78,16 @@
                         </fonts>
                         <updateSecuritySandbox>true</updateSecuritySandbox>
                     </configuration>
+                    <executions>
+                        <execution>
+                            <id>sources</id>
+                            <goals>
+                                <goal>sources</goal>
+                            </goals>
+
+                        </execution>
+                    </executions>
+
                 </plugin>
 
             </plugins>
