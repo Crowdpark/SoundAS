@@ -117,7 +117,7 @@ package treefortress.sound
 
 			if(enableSeamlessLoops) {
 				_seamlessLooper = new MP3Looper(sound, true);
-				_seamlessLooper.play(_loopsRemaining)
+				_seamlessLooper.play(loops)
                 _seamlessLooper.volume = volume/100 * masterVolume;
 				_isPlaying = true;
 				return this;
