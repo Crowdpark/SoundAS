@@ -6,7 +6,7 @@
     <groupId>de.crowdpark.libs</groupId>
     <artifactId>SoundAS</artifactId>
     <modelVersion>4.0.0</modelVersion>
-    <version>1.3</version>
+    <version>1.4-SNAPSHOT</version>
 
     <packaging>swc</packaging>
 
