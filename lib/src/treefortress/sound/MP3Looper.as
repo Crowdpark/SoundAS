@@ -25,6 +25,8 @@ package treefortress.sound
 		private var _samplesPosition:int = 0;
 		private var samplesTotal:int;
 
+        private var _volume:Number;
+
 		private var currentPlayCount:int;
 		public var enabled:Boolean = true; //start/stop playback
 
@@ -59,6 +61,7 @@ package treefortress.sound
                 transform.volume = value;
                 _channel.soundTransform = transform;
             }
+            _volume = value;
         }
 
 		public function get isPlaying():Boolean
@@ -98,6 +101,10 @@ package treefortress.sound
 		}
 
 
+        public function resume():void {
+            startPlayback();
+        }
+
 		public function update():void
 		{
 			samplesTotal = getTotalSamples();
@@ -131,6 +138,7 @@ package treefortress.sound
 			output.addEventListener(SampleDataEvent.SAMPLE_DATA, sampleData);
 			update();
 			_channel = output.play();
+            volume = _volume;
 		}
 
 		private function stopPlayback():void

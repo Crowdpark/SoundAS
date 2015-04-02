@@ -173,7 +173,13 @@ package treefortress.sound
 		 * Resume from previously paused time. Optionally start over if it's not paused.
 		 */
 		public function resume(forceStart:Boolean = false):SoundInstance {
-			if(isPaused || forceStart){
+
+            if(_seamlessLooper) {
+                _seamlessLooper.resume();
+                return this;
+            }
+
+            if(isPaused || forceStart){
 				play(_volume, pauseTime, loops, allowMultiple);
 			} 
 			return this;
