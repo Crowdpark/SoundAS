@@ -102,7 +102,8 @@ package treefortress.sound
 
 
         public function resume():void {
-            startPlayback();
+            if (!isPlaying)
+                startPlayback();
         }
 
 		public function update():void
@@ -143,6 +144,7 @@ package treefortress.sound
 
 		private function stopPlayback():void
 		{
+            _channel = null;
 			output.removeEventListener(SampleDataEvent.SAMPLE_DATA, sampleData);
 			dispatchEvent(new Event(Event.COMPLETE));
 		}
